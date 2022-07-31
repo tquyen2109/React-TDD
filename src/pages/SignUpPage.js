@@ -1,5 +1,6 @@
 import {Component} from "react";
 import axios from "axios";
+
 class SignUpPage extends Component {
     state = {
         username: '',
@@ -17,30 +18,45 @@ class SignUpPage extends Component {
         event.preventDefault();
         const {username, email, password} = this.state;
         const body = {
-            username,email, password
+            username, email, password
         }
         axios.post("/api/1.0/users", body);
     }
+
     render() {
         let disabled = true;
         const {password, passwordRepeat} = this.state;
-        if(password && passwordRepeat) {
+        if (password && passwordRepeat) {
             disabled = password !== passwordRepeat;
         }
         return (
-            <div>
-                <form action="">
-                    <h1>Sign Up</h1>
-                    <label htmlFor="username">Username</label>
-                    <input id="username" onChange={this.onChange} />
-                    <label htmlFor="email" >E-mail</label>
-                    <input id="email" onChange={this.onChange}/>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" onChange={this.onChange}/>
-                    <label htmlFor="passwordRepeat">Password Repeat</label>
-                    <input type="password" id="passwordRepeat" onChange={this.onChange}/>
-                    <button disabled={disabled} onClick={this.submit}>Sign Up</button>
-                    </form>
+            <div className={"col-lg-6 offset-lg-3 offset-md-2 col-md-8"}>
+                <form className={"card mt-5"}>
+                    <div className={"card-header"}>
+                        <h1 className={"text-center"}>Sign Up</h1>
+                    </div>
+                    <div className={"card-body"}>
+                        <div className={"mb-3"}>
+                            <label htmlFor="username" className={"form-label"}>Username</label>
+                            <input id="username" className={"form-control"} onChange={this.onChange}/>
+                        </div>
+                        <div className={"mb-3"}>
+                            <label className={"form-label"} htmlFor="email">E-mail</label>
+                            <input className={"form-control"} id="email" onChange={this.onChange}/>
+                        </div>
+                        <div className={"mb-3"}>
+                            <label className={"form-label"} htmlFor="password">Password</label>
+                            <input className={"form-control"} type="password" id="password" onChange={this.onChange}/>
+                        </div>
+                        <div className={"mb-3"}>
+                            <label className={"form-label"} htmlFor="passwordRepeat">Password Repeat</label>
+                            <input className={"form-control"} type="password" id="passwordRepeat" onChange={this.onChange}/>
+                        </div>
+                        <div className={"text-center"}>
+                            <button className={"btn btn-primary"} disabled={disabled} onClick={this.submit}>Sign Up</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         )
     }
